@@ -58,43 +58,41 @@ class Index extends React.Component<WithStyles<typeof styles>, State> {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <List
-          component="nav"
-          subheader={
-              <ListSubheader component="div">Nested List Items</ListSubheader>
-          }
-          className={this.props.classes.root}
+       <List
+        component="nav"
+        subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
+        className={classes.root}
       >
-          <ListItem button>
+        <ListItem button>
+          <ListItemIcon>
+            <SendIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Sent mail" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Drafts" />
+        </ListItem>
+        <ListItem button onClick={this.handleClick}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Inbox" />
+          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
               <ListItemIcon>
-                  <SendIcon />
+                <StarBorder />
               </ListItemIcon>
-              <ListItemText inset primary="Sent mail" />
-          </ListItem>
-          <ListItem button>
-              <ListItemIcon>
-                  <DraftsIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Drafts" />
-          </ListItem>
-          <ListItem button onClick={this.handleClick}>
-              <ListItemIcon>
-                  <InboxIcon />
-              </ListItemIcon>
-              <ListItemText inset primary="Inbox" />
-              {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                  <ListItem button className={this.props.classes.nested}>
-                      <ListItemIcon>
-                          <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText inset primary="Starred" />
-                  </ListItem>
-              </List>
-          </Collapse>
-        </List>
+              <ListItemText inset primary="Starred" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </List>
       </div>
     );
   }
